@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\FallbackController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\PostsController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,4 +14,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Route for single action controllers
-Route::get('/', HomeController::class);
+Route::get('/', DashboardController::class);

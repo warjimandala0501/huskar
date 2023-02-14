@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HouseRuleController;
 use App\Http\Controllers\WatchController;
@@ -22,13 +23,19 @@ use App\Http\Controllers\UserManagementController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/custom_login', [LoginController::class, 'customLogin']);
 Route::get('/home', HomeController::class);
 Route::get('/house_rule', HouseRuleController::class);
 Route::get('/watch&listen', WatchController::class);
 Route::get('/dining_room', DiningRoomController::class);
 Route::get('/weather_forecast', WeatherForecastController::class);
-Route::get('/user_management', [UserManagementController::class, 'index']);
-Route::delete('/user_management/{id}', [UserManagementController::class, 'delete']);
+Route::prefix('user_management')->group(function (){
+    Route::get('/', [UserManagementController::class, 'index']);
+    Route::delete('/{id}', [UserManagementController::class, 'delete']);
+    Route::patch('/{id}', [UserManagementController::class, 'update']);
+});
+
 
 
 
